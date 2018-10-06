@@ -1,0 +1,5 @@
+<div class="contents row" >
+  <% @tweets_selected.each do |tweet_selected| %>                              <!--|tweet|・・・変数tweetの定義はここで行われている-->
+    <%= render partial: "tweet", locals: { tweet: tweet_selected } %>   <!--</div>   部分テンプレート「_tweet.html.erb」の呼び出し-->
+  <% end %> 
+</div>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>落とし物・忘れ物</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Unica+One::latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header__bar row">
+        <h1 class="grid-6"><a href="/">落とし物・忘れ物</a></h1>
+          <% if user_signed_in? %>
+            <div class="grid-6">
+              <!--#キーワード検索--> 
+              <%= form_tag('/tweets/select', method: :get) do %>
+                <input class="search__query" name="keyword" placeholder="探し物は何ですか？" type="text" value=""><button class="btn-search" title="検索" type="submit"><i class="icon-search"></i></button></input>                
+              <% end %>
+              <!--#プルダウン検索-->
+              <%= form_tag('/tweets/select', method: :get) do %>
+                <%= select_tag "keyword", options_for_select([["その他","その他"],["ねこ","ねこ"],["文具類","文具類"],["かさ","かさ"],["高価そうなもの(財布とかスマホとか)","高価そうなもの(財布とかスマホとか)"],["本・テキストなど","本・テキストなど"],["布製品(ハンカチとか服とか)","布製品(ハンカチとか服とか)"]]) %> 
+                <input type="submit" value="あってくれ～～！">
+              <% end %>
+              
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, :class => 'post'%>
+              <a class="post" href="/tweets/new">預かってます! (投稿する)</a>
+            </div>
+              
+          <% else %>
+            <div class="grid-6">
+              <!--#キーワード検索--> 
+              <!--<%= form_tag('/tweets/select', method: :get) do %>-->
+              <!--  <input class="search__query" name="keyword" placeholder="探し物は何ですか？" type="text" value=""><button class="btn-search" title="検索" type="submit"><i class="icon-search"></i></button></input>                -->
+              <!--<% end %>-->
+              <!--#プルダウン検索-->
+              <!--<%= form_tag('/tweets/select', method: :get) do %>-->
+              <!--  <%= select_tag "keyword", options_for_select([["その他","その他"],["ねこ","ねこ"],["文具類","文具類"],["かさ","かさ"],["高価そうなもの(財布とかスマホとか)","高価そうなもの(財布とかスマホとか)"],["本・テキストなど","本・テキストなど"],["布製品(ハンカチとか服とか)","布製品(ハンカチとか服とか)"]]) %>  -->
+              <!--  <input type="submit" value="あってくれ～～！">-->
+              <!--<% end %>-->
+              
+            <%= link_to "預り主とやり取りするにはログイン!", new_user_session_path, :class => 'post' %>
+            <%= link_to "ログインするには新規登録!", new_user_registration_path, :class => 'post' %>
+            </div>
+          <% end %>
+      </div>
+    </header>
+
+    <%= yield %>
+
+    <footer>
+      <p>
+        Copyright Lost & found Japan 2018.
+      </p>
+    </footer>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--#キーワード検索するタブを作る-->              
+<!--            <div class="grid-6">-->
+<!--<%= form_tag("tweets/:text/select", method: "get") do %>-->
+<!--<%= text_field_tag :text , params[:text],placeholder: "探し物は何ですか？"%>-->
+<!--<% end %>-->
+
+<!--#プルダウン検索バー生成-->
+<!--<%= form_tag('/tweets/:text/select', method: "get") do %>-->
+<!--<%= select_tag "text", options_for_select([["その他","その他"],["文具類","文具類"]]) %>-->
+<!--<% end %>-->
+
+
+<!--<%= @tweets_selected %>-->
+<!--#検索結果出力場所-->
+<!--,["布製品(ハンカチとか服とか)","布製品(ハンカチとか服とか)"],["本・テキストなど","本・テキストなど"]["かさ","かさ"]["高価そうなもの(財布とかスマホとか)","高価そうなもの(財布とかスマホとか)"]                -->
