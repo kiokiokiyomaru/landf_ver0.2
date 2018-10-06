@@ -20,6 +20,7 @@ class TweetsController < ApplicationController
   # end
   
   
+  
 def select 
 # # text_ids = Tweet.where(text:params[:text]) .pluck(:id)
 # # プルダウンで選ばれたtextと同一のtextを持つレコードを取得し、そのidを全て列挙する
